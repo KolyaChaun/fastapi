@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "fastapi_one"
+name = "fastapi"
 version = "0.1.0"
 description = "for portfolio"
 authors = ["Mykola <kolia.chaun@icloud.com>"]
