@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "fastapi"
+name = "fastapi_project"
 version = "0.1.0"
 description = "for portfolio"
 authors = ["Mykola <kolia.chaun@icloud.com>"]
@@ -9,6 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = {extras = ["all"], version = "^0.108.0"}
+pymongo = "^4.6.1"
 
 
 [tool.poetry.group.dev.dependencies]

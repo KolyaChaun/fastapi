@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 import constants
+from storage import storage
 
 router = APIRouter(
     prefix='/api/bags',
@@ -19,6 +20,7 @@ class NewBagData(BaseModel):
 
 @router.post('/create')
 def create_bag(bag: NewBagData) -> NewBagData:
+    storage.create_bag(bag.model_dump())
     return bag
 
 
