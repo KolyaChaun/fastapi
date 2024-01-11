@@ -1,6 +1,8 @@
 from fastapi import FastAPI
+from api import api_bags
 
 app = FastAPI()
+app.include_router(api_bags.router)
 
 
 @app.get('/')
