@@ -12,6 +12,7 @@ app.include_router(web_recipes.router)
 #     return {'try': 'OK'}
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import uvicorn
-    uvicorn.run('main:app', reload=True, host='0.0.0.0', port=8500)
+
+    uvicorn.run("main:app", reload=True, host="0.0.0.0", port=8500)
