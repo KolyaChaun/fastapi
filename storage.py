@@ -14,9 +14,9 @@ class BaseStorage:
     def get_recipe(self):
         pass
 
-    # @abstractmethod
-    # def get_recipes_by_title(self):
-    #     pass
+    @abstractmethod
+    def get_recipes_info(self, recipe_uuid: str):
+        pass
 
     @abstractmethod
     def update_recipe(self, recipe_uuid: str, new_description: str):
@@ -36,32 +36,33 @@ class MongoStorage(BaseStorage):
 
         client = pymongo.MongoClient(url, tlsCAFile=certifi.where())
 
-        db = client['Recipes']
-        self.collection = db['Recipes']
+        db = client["Recipes"]
+        self.collection = db["Recipes"]
 
     def create_recipe(self, recipe: dict) -> dict:
-        recipe['uuid'] = str(uuid4())
+        recipe["uuid"] = str(uuid4())
         self.collection.insert_one(recipe)
         return recipe
 
     def get_recipe(self, skip: int = 0, limit: int = 10, search_param: str = None):
         query = {}
         if search_param:
-            query = {'title': {'$regex': search_param.strip()}}
+            query = {"title": {"$regex": search_param.strip()}}
         return self.collection.find(query).skip(skip).limit(limit)
 
-    # def get_recipes_by_title(self):
-    #     raise NotImplemented
-
     def update_recipe(self, recipe_uuid: str, new_description: str):
-        filter_data = {'uuid': recipe_uuid}
-        new_data = {'$set': {'description': new_description}}
+        filter_data = {"uuid": recipe_uuid}
+        new_data = {"$set": {"description": new_description}}
         processed = self.collection.update_one(filter_data, new_data)
         return processed
 
     def delete_recipe(self, recipe_uuid: str):
-        filter_data = {'uuid': recipe_uuid}
+        filter_data = {"uuid": recipe_uuid}
         self.collection.delete_one(filter_data)
+
+    def get_recipes_info(self, recipe_uuid: str):
+        filter_data = {'uuid': recipe_uuid}
+        return self.collection.find(filter_data)
 
 
 storage = MongoStorage()

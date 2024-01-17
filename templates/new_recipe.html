@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+     <form method="post" action="{{ url_for('add_recipe') }}">
+  <div class="mb-3">
+    <label for="recipe_title" class="form-label">Назва рецепта</label>
+    <input type="text" class="form-control" id="recipe_title" required name="title" minlength="3">
+  </div>
+  <div class="mb-3">
+    <label for="recipe_cover" class="form-label">Додати фото</label>
+    <input type="text" class="form-control" id="recipe_cover" required name="cover" minlength="3">
+  </div>
+       <div class="mb-3">
+    <label for="recipe_description" class="form-label">Опис</label>
+    <input type="text" class="form-control" id="recipe_description" required name="description" minlength="3">
+  </div>
+  <button type="submit" class="btn btn-primary">Опублікувати</button>
+</form>
+
+
+
+</div>
+
+{% endblock %}
